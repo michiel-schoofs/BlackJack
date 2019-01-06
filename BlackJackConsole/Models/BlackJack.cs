@@ -6,7 +6,7 @@ namespace BlackJackConsole.Models {
     class BlackJack {
         public const bool FaceDown = false;
         public const bool FaceUp = true;
-        private Deck _deck;
+        private Deck _deck;  
 
         public Hand DealerHand { get; set; }
         public Hand PlayerHand { get; set; }
