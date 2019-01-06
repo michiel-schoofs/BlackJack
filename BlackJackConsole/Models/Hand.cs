@@ -4,22 +4,30 @@ using System.Text;
 
 namespace BlackJackConsole.Models {
     public class Hand {
+        #region Field
         private IList<BlackJackCard> _cards;
+        #endregion
+
+        #region Properties
         public IEnumerable<BlackJackCard> Cards { get { return _cards; } }
         public int NrOfCards { get => _cards.Count; }
         public int Value { get => CalculateValue(); }
+        #endregion
 
+        #region Constructor
         public Hand() {
             _cards = new List<BlackJackCard>();
 
         }
+        #endregion
 
+        #region Methods
         public void AddCard(BlackJackCard blackJackCard) {
             _cards.Add(blackJackCard);
         }
 
         public void TurnAllCardsFaceUp() {
-            foreach(BlackJackCard bjc in Cards) {
+            foreach (BlackJackCard bjc in Cards) {
                 if (!bjc.FaceUp)
                     bjc.TurnCard();
             }
@@ -29,7 +37,7 @@ namespace BlackJackConsole.Models {
             int val = 0;
             bool ace = false;
 
-            foreach(BlackJackCard bjc in Cards) {
+            foreach (BlackJackCard bjc in Cards) {
                 if (bjc.FaceUp) {
                     val += bjc.Value;
                     if (bjc.FaceValue == FaceValue.Ace)
@@ -37,10 +45,11 @@ namespace BlackJackConsole.Models {
                 }
             }
 
-            if (ace && (val + 10) < 21)
+            if (ace && (val + 10) <= 21)
                 val += 10;
 
             return val;
-        }
+        } 
+        #endregion
     }
 }

@@ -4,24 +4,31 @@ using System.Text;
 
 namespace BlackJackConsole.Models {
     public class BlackJackCard:Card {
+        #region Properties
         public bool FaceUp { get; set; } = false;
-        public int Value { get {
+        public int Value {
+            get {
                 if (FaceUp) {
                     int val = (int)base.FaceValue;
                     return (val > 10 ? 10 : val);
                 }
                 return 0;
             }
-        }
+        } 
+        #endregion
 
-        public BlackJackCard(Suit suit, FaceValue faceValue):base(suit,faceValue){}
-        
+        #region Constructor
+        public BlackJackCard(Suit suit, FaceValue faceValue) : base(suit, faceValue) { } 
+        #endregion
+
+        #region Methods
         public void TurnCard() {
             FaceUp = !FaceUp;
         }
 
         public override string ToString() {
             return $"{Suit}-{FaceValue}";
-        }
+        } 
+        #endregion
     }
 }
