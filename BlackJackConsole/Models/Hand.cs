@@ -3,24 +3,44 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace BlackJackConsole.Models {
-    class Hand {
+    public class Hand {
         private IList<BlackJackCard> _cards;
-        public IEnumerable<BlackJackCard> Cards { get; set; }
+        public IEnumerable<BlackJackCard> Cards { get { return _cards; } }
+        public int NrOfCards { get => _cards.Count; }
+        public int Value { get => CalculateValue(); }
 
         public Hand() {
-            throw new NotImplementedException();
+            _cards = new List<BlackJackCard>();
+
         }
 
         public void AddCard(BlackJackCard blackJackCard) {
-            throw new NotImplementedException();
+            _cards.Add(blackJackCard);
         }
 
         public void TurnAllCardsFaceUp() {
-            throw new NotImplementedException();
+            foreach(BlackJackCard bjc in Cards) {
+                if (!bjc.FaceUp)
+                    bjc.TurnCard();
+            }
         }
 
         private int CalculateValue() {
-            throw new NotImplementedException();
+            int val = 0;
+            bool ace = false;
+
+            foreach(BlackJackCard bjc in Cards) {
+                if (bjc.FaceUp) {
+                    val += bjc.Value;
+                    if (bjc.FaceValue == FaceValue.Ace)
+                        ace = true;
+                }
+            }
+
+            if (ace && (val + 10) < 21)
+                val += 10;
+
+            return val;
         }
     }
 }

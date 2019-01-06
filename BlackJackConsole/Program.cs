@@ -4,10 +4,16 @@ using System;
 namespace BlackJackConsole {
     class Program {
         static void Main(string[] args) {
-            Deck deck = new Deck();
-            for(int i = 0; i < 52; i++) {
-                Console.WriteLine(deck.Draw());
-            }
+            Hand _aHand = new Hand();
+
+            BlackJackCard card = new BlackJackCard(Suit.Diamonds, FaceValue.Five);
+            _aHand.AddCard(card);
+            card = new BlackJackCard(Suit.Diamonds, FaceValue.Ace);
+            _aHand.AddCard(card);
+
+            _aHand.TurnAllCardsFaceUp();
+
+            Console.WriteLine(_aHand.Value);
             Console.ReadLine();
         }
     }
